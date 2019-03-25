@@ -13,21 +13,20 @@ public class MenuPrincipal {
 	private static final int OPCAO_LISTAR_TODOS = 3;
 	private static final int OPCAO_SAIR = 4;
 	
-	UsuarioVO u1 = new UsuarioVO(1, "Amanda", "amanda@email.com", "123456", 1);  
-	UsuarioVO u2 = new UsuarioVO(2, "Beatriz", "beatriz@email.com", "1234567", 2);
+	UsuarioVO u1 = new UsuarioVO(1, "Amanda", "amanda@email.com", "123456", null);  
+	UsuarioVO u2 = new UsuarioVO(2, "Beatriz", "beatriz@email.com", "1234567", null);
 	UsuarioVO[] usuarios = {u1, u2};
 	
-	Scanner teclado = new Scanner(System.in);
 	
 	public void apresentarMenuGrafico() {
 		
-		String textoMenu = " Usu�rios \n"
-			     + "Op��es: \n"
+		String textoMenu = " Usuarios \n"
+			     + "Opcoes: \n"
 				 + OPCAO_CADASTRO + " - Cadastro \n"
 				 + OPCAO_EXCLUIR + " - Excluir \n"
 				 + OPCAO_LISTAR_TODOS + " - Listar Todos \n"
 				 + OPCAO_SAIR + " - Sair \n"
-                + "Digite a Op��o (somente o n�mero): ";
+                + "Digite a Opcoes (somente o numero): ";
 
 		String opcaoInformada = JOptionPane.showInputDialog(textoMenu);
 		
@@ -35,7 +34,7 @@ public class MenuPrincipal {
 			int opcao = Integer.parseInt(opcaoInformada);
 			encaminharParaTelaEscolhida(opcao);
 		}catch(NumberFormatException nExp) {
-			JOptionPane.showMessageDialog(null, "Informe um n�mero inteiro!");
+			JOptionPane.showMessageDialog(null, "Informe um numero inteiro!");
 			apresentarMenuGrafico();
 		}
 		
@@ -64,7 +63,7 @@ public class MenuPrincipal {
 						"Tem certeza?");
 				switch (opcaoSelecionada) {
 					case JOptionPane.YES_OPTION:
-						JOptionPane.showMessageDialog(null, "At� mais");
+						JOptionPane.showMessageDialog(null, "Ate mais");
 						break;
 					case JOptionPane.NO_OPTION:
 						apresentarMenuGrafico();

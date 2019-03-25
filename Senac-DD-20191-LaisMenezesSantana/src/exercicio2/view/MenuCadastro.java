@@ -13,7 +13,7 @@ public class MenuCadastro {
 		usuario.setNome(JOptionPane.showInputDialog("Informe o nome:"));
 		usuario.setEmail(obterEmail());
 		usuario.setSenha(obterSenha());
-		usuario.setNivel(obterNivel());
+		//usuario.setNivel(obterNivel());
 		
 	
 		JOptionPane.showMessageDialog(null, "Lista de usuarios!\n "
@@ -21,16 +21,16 @@ public class MenuCadastro {
 	}
 
 	private int obterNivel() {
-		String nivelInformado = JOptionPane.showInputDialog("Informe o nivel usando apenas as op��es 1/2:");
+		String nivelInformado = JOptionPane.showInputDialog("Informe o nivel usando apenas as opcoes 1/2:");
 		int nivel = 0;
 		try {
 			nivel = Integer.parseInt(nivelInformado);
 			if ((nivel != 1) && (nivel != 2)) {
-				JOptionPane.showMessageDialog(null, "Informe o nivel usando apenas as op��es 1/2:");
+				JOptionPane.showMessageDialog(null, "Informe o nivel usando apenas as opcoes 1/2:");
 				 nivel = obterNivel();	
 			}
 		}catch (NumberFormatException nfe){
-			JOptionPane.showMessageDialog(null, "Informe o nivel usando apenas as op��es 1/2:");
+			JOptionPane.showMessageDialog(null, "Informe o nivel usando apenas as opcoes 1/2:");
 			 nivel = obterNivel();	
 		}
 		return nivel;
@@ -46,7 +46,7 @@ public class MenuCadastro {
 		}
 		return senhaInformada;
 	}
-
+	
 	private boolean senhaCorreta(String senhaInformada) {
 		boolean senhaCorreta = false;
 		String[] partes = senhaInformada.split(" ");
@@ -55,6 +55,8 @@ public class MenuCadastro {
 		}
 		return senhaCorreta;
 	}
+
+
 
 	private String obterEmail() {
 		String emailInformado = JOptionPane.showInputDialog("Informe o email:");
