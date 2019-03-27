@@ -4,15 +4,18 @@ public class NivelVO {
 	private int id;
 	private String descricao;
 	private boolean flagAtiva;
+	
 	public NivelVO(int id, String descricao, boolean flagAtiva) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.flagAtiva = flagAtiva;
 	}
+	
 	public NivelVO() {
 		super();
 	}
+	
 	public int getId() {
 		return id;
 	}

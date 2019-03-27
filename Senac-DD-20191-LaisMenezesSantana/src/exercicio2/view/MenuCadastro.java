@@ -1,7 +1,5 @@
 package exercicio2.view;
 
-import java.util.Scanner;
-
 import javax.swing.JOptionPane;
 
 import exercicio2.model.vo.UsuarioVO;
@@ -19,6 +17,24 @@ public class MenuCadastro {
 		JOptionPane.showMessageDialog(null, "Lista de usuarios!\n "
 				+ usuario.toString());
 	}
+	
+	private String obterSenha() {
+		String senhaInformada = JOptionPane.showInputDialog("Informe a senha(Minimo 6 caracteres):");
+		
+		if(!senhaCorreta(senhaInformada) || senhaInformada.length() < 6) {
+			JOptionPane.showMessageDialog(null, "Informe a senha com somente numeros, letras e caracteres especiais!(Minimo 6 caracteres)");
+			senhaInformada = obterSenha();
+		}
+		return senhaInformada;
+	}
+	private boolean senhaCorreta(String senhaInformada) {
+		boolean senhaCorreta = false;
+		String[] partes = senhaInformada.split(" ");
+		if(partes.length == 1) {
+			senhaCorreta = true;
+		}
+		return senhaCorreta;
+	}
 
 	private int obterNivel() {
 		String nivelInformado = JOptionPane.showInputDialog("Informe o nivel usando apenas as opcoes 1/2:");
@@ -35,27 +51,6 @@ public class MenuCadastro {
 		}
 		return nivel;
 	}
-
-
-	private String obterSenha() {
-		String senhaInformada = JOptionPane.showInputDialog("Informe a senha(Minimo 6 caracteres):");
-		
-		if(!senhaCorreta(senhaInformada) || senhaInformada.length() < 6) {
-			JOptionPane.showMessageDialog(null, "Informe a senha com somente numeros, letras e caracteres especiais!(Minimo 6 caracteres)");
-			senhaInformada = obterSenha();
-		}
-		return senhaInformada;
-	}
-	
-	private boolean senhaCorreta(String senhaInformada) {
-		boolean senhaCorreta = false;
-		String[] partes = senhaInformada.split(" ");
-		if(partes.length == 1) {
-			senhaCorreta = true;
-		}
-		return senhaCorreta;
-	}
-
 
 
 	private String obterEmail() {
