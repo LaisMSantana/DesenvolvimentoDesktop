@@ -3,13 +3,11 @@ package exercicio2.model.vo;
 public class NivelVO {
 	private int id;
 	private String descricao;
-	private boolean flagAtiva;
 	
-	public NivelVO(int id, String descricao, boolean flagAtiva) {
+	public NivelVO(int id, String descricao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-		this.flagAtiva = flagAtiva;
 	}
 	
 	public NivelVO() {
@@ -28,13 +26,7 @@ public class NivelVO {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public boolean isFlagAtiva() {
-		return flagAtiva;
-	}
-	public void setFlagAtiva(boolean flagAtiva) {
-		this.flagAtiva = flagAtiva;
-	}
-	
+
 	
 
 }

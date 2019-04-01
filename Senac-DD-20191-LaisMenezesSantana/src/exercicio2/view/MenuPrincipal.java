@@ -12,10 +12,7 @@ public class MenuPrincipal {
 	private static final int OPCAO_EXCLUIR = 2;
 	private static final int OPCAO_LISTAR_TODOS = 3;
 	private static final int OPCAO_SAIR = 4;
-	
-	UsuarioVO u1 = new UsuarioVO(1, "Amanda", "amanda@email.com", "123456", null);  
-	UsuarioVO u2 = new UsuarioVO(2, "Beatriz", "beatriz@email.com", "1234567", null);
-	UsuarioVO[] usuarios = {u1, u2};
+
 	
 	
 	public void apresentarMenuGrafico() {
@@ -55,7 +52,7 @@ public class MenuPrincipal {
 			}
 			case OPCAO_LISTAR_TODOS: {
 				MenuListarTodos menuListarTodos = new MenuListarTodos();
-				menuListarTodos.apresentarMenuListarTodosGrafico(usuarios);
+				//menuListarTodos.apresentarMenuListarTodosGrafico();
 				break;
 			}
 			case OPCAO_SAIR: {
