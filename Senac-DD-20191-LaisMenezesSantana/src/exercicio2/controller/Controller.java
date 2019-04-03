@@ -1,5 +1,7 @@
 package exercicio2.controller;
 
+import java.util.ArrayList;
+
 import exercicio2.model.bo.UsuarioBO;
 import exercicio2.model.vo.NivelVO;
 import exercicio2.model.vo.UsuarioVO;
@@ -67,33 +69,25 @@ public class Controller {
 		return mensagem;
 	}
 	
-	public UsuarioVO listarTodos(UsuarioVO usuarios) {
+	public ArrayList<UsuarioVO> listarTodos() {
 			UsuarioBO usuarioBO = new UsuarioBO();
-			return usuarioBO.listarTodosUsuarios(usuarios);
-
+			return usuarioBO.listarTodosUsuarios();
 	}
 	
-	public String listarPorNivel(NivelVO nivel) {
-		String mensagem = "";
+	public ArrayList<UsuarioVO> listarPorNivel(NivelVO nivel) throws Exception{
 		if(nivel == null) {
-			mensagem = "Escolha o nivel!";
+			throw new Exception("Escolha o nivel");
 		} 
-		if(mensagem.isEmpty()) {
 			UsuarioBO usuarioBO = new UsuarioBO();
-			usuarioBO.listarUsuarioNivel(nivel);
-		}
-		return mensagem;
+			return usuarioBO.listarUsuarioNivel(nivel);
 	}
 	
-	public String listarPorNome(UsuarioVO usuario) {
-		String mensagem = "";
-		if(usuario == null) {
-			mensagem = "Escolha o usuario!";
+	public UsuarioVO listarPorNome(String nome) throws Exception{
+		
+		if(nome == null|| nome.isEmpty() || nome.trim().length() < 3) {
+			throw new Exception("Nome deve possuir no mínimo 3 caracteres");
 		} 
-		if(mensagem.isEmpty()) {
 			UsuarioBO usuarioBO = new UsuarioBO();
-			usuarioBO.listarUsuarioNome(usuario);
-		}
-		return mensagem;
+			return usuarioBO.listarUsuarioNome(nome);
 	}
 }

@@ -1,6 +1,7 @@
 package exercicio2.model.bo;
 
-import javax.swing.JOptionPane;
+
+import java.util.ArrayList;
 
 import exercicio2.model.dao.UsuarioDAO;
 import exercicio2.model.vo.NivelVO;
@@ -52,25 +53,19 @@ public class UsuarioBO {
 		return mensagem;
 	}
 
-	public String listarUsuarioNivel(NivelVO nivel) {
-		String mensagem = "";
-		
-		
-		return mensagem;
-		
+	public ArrayList<UsuarioVO> listarUsuarioNivel(NivelVO nivel) {
+		UsuarioDAO dao = new UsuarioDAO();
+		return dao.consultarUsuarioNivel(nivel);
 	}
 
-	public String listarUsuarioNome(UsuarioVO usuario) {
-		String mensagem = "";
-		
-		
-		return mensagem;
+	public UsuarioVO listarUsuarioNome(String nome) {
+		UsuarioDAO dao = new UsuarioDAO();
+		return dao.consultarUsuarioNome(nome);
 	}
 
-	public UsuarioVO listarTodosUsuarios(UsuarioVO usuarios) {
-		
-		return null;
-		
+	public ArrayList<UsuarioVO> listarTodosUsuarios() {
+		UsuarioDAO dao = new UsuarioDAO();
+		return dao.consultarTodas();
 	}
 	
 
