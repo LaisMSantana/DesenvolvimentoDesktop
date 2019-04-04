@@ -6,16 +6,14 @@ public class UsuarioVO {
 	private String email;
 	private String senha;
 	private NivelVO nivel;
-	private boolean flagAtiva;
 
-	public UsuarioVO(int id, String nome, String email, String senha, NivelVO nivel, boolean flagAtiva) {
+	public UsuarioVO(int id, String nome, String email, String senha, NivelVO nivel) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.nivel = nivel;
-		this.flagAtiva = flagAtiva;
 	}
 	public UsuarioVO() {
 		super();
@@ -50,12 +48,7 @@ public class UsuarioVO {
 	public void setNivel(NivelVO nivel) {
 		this.nivel = nivel;
 	}
-	public boolean isFlagAtiva() {
-		return flagAtiva;
-	}
-	public void setFlagAtiva(boolean flagAtiva) {
-		this.flagAtiva = flagAtiva;
-	}
+
 	public String toString() {
 		return "Usuario [IdUsuario=" + getId() + ", Nome=" + getNome()
 				+ ", Email=" + getEmail() + ", senha=" + getSenha() + ", nivel="+ getNivel() +"]";

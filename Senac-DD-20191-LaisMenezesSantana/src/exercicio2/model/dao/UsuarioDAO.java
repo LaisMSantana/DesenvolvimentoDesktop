@@ -121,4 +121,44 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
+	public int excluirUsuario(UsuarioVO usuarioEX) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		int resultado = 0;
+		String query = "DELETE FROM USUARIO WHERE IDUSUARIO = " + usuarioEX.getId();
+		try{
+			resultado = stmt.executeUpdate(query);
+		} catch (SQLException e){
+			System.out.println("Erro ao executar a Query de Exclusão do Usuario. Causa: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return resultado;
+	}
+
+	public boolean existeRegistroADM(UsuarioVO usuarioADM) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		String query = "SELECT USUARIO.EMAIL, USUARIO.SENHA, NIVEL.DESCRICAO "
+				+ "FROM USUARIO INNER JOIN NIVEL ON USUARIO.IDNIVEL = NIVEL.IDNIVEL WHERE USUARIO.EMAIL = '" + usuarioADM.getEmail() +"' "
+						+ "AND USUARIO.SENHA = '" + usuarioADM.getSenha() + "' AND NIVEL.DESCRICAO = ADMIN";
+		try {
+			resultado = stmt.executeQuery(query);
+			if (resultado.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query que verifica existência de Registro por Admin. Causa: " + e.getMessage());
+			return false;
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return false;
+	}
+
+
 }

@@ -60,10 +60,14 @@ public class Controller {
 			mensagem = "Digite a senha!";
 		}
 		if(mensagem.isEmpty()) {
-			UsuarioVO usuario = new UsuarioVO();
+			UsuarioVO usuarioEX = new UsuarioVO();
+			usuarioEX.setId(Integer.parseInt(idInformado));
+			UsuarioVO usuarioADM = new UsuarioVO();
+			usuarioADM.setEmail(email);
+			usuarioADM.setSenha(senha);		
 			
 			UsuarioBO usuarioBO = new UsuarioBO();
-			usuarioBO.excluirUsuario(usuario);
+			usuarioBO.excluirUsuario(usuarioEX , usuarioADM );
 		}
 		
 		return mensagem;

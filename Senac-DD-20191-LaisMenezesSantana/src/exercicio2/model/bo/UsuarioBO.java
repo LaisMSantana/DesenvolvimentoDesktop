@@ -46,10 +46,20 @@ public class UsuarioBO {
 		return emailCorreto;
 	}
 
-	public String excluirUsuario(UsuarioVO usuario) {
+	public String excluirUsuario(UsuarioVO usuarioEX, UsuarioVO usuarioADM) {
+		UsuarioDAO dao = new UsuarioDAO();
 		String mensagem = "";
-		
-		
+		if(dao.existeRegistroADM(usuarioADM) == false) {
+			mensagem = "Não existe usuario Admin com esse email e senha.";
+		} else {
+			int statusPersistencia = dao.excluirUsuario(usuarioEX);
+			
+			if(statusPersistencia == 1) {
+				mensagem = "Usuario foi excluido com sucesso";
+			}else if(statusPersistencia == 0) {
+				mensagem = "Erro ao exccluir usuario";
+				}
+			}
 		return mensagem;
 	}
 
