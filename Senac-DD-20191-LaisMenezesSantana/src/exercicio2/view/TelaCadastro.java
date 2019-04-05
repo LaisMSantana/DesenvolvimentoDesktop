@@ -11,6 +11,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import exercicio2.controller.Controller;
+import exercicio2.model.bo.NivelBO;
 import exercicio2.model.vo.NivelVO;
 
 import java.awt.event.ActionListener;
@@ -26,7 +28,7 @@ public class TelaCadastro {
 	private JComboBox cbNivel;
 	private JPasswordField pfSenha;
 	private JPasswordField pfConfirmacaoSenha;
-	//private List<Nivel> niveis;
+	private List<NivelVO> niveis;
 
 
 	/**
@@ -56,7 +58,6 @@ public class TelaCadastro {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//TODO consultar os níveis no banco (criei na mão aqui :D)
 				consultarNiveis(); //TODO alterar esta chamada AQUI
 				
 				frmCadastroDeUsuarios = new JFrame();
@@ -105,8 +106,8 @@ public class TelaCadastro {
 				frmCadastroDeUsuarios.getContentPane().add(pfConfirmacaoSenha);
 				
 				//Novo componente: Combobox
-				//cbNivel = new JComboBox();
-				//cbNivel.setModel(new DefaultComboBoxModel(niveis.toArray()));
+				cbNivel = new JComboBox();
+				cbNivel.setModel(new DefaultComboBoxModel(niveis.toArray()));
 				
 				//Inicia sem nada selecionado no combo
 				cbNivel.setSelectedIndex(-1);
@@ -133,8 +134,8 @@ public class TelaCadastro {
 						//TODO
 						//1 - Ler os valores digitados nos campos da tela
 						
-						//2 - Chamar o método salvar(...) de UsuarioController, 
-						//passando os valores digitados
+						Controller controller = new Controller();
+						//controller.salvar(txtNome, txtEmail, pfSenha, pfConfirmacaoSenha, cbNivel);
 						
 						//3 - Mostrar a mensagem devolvida por UsuarioController na tela, 
 						//por exemplo com JOptionPane
@@ -145,14 +146,8 @@ public class TelaCadastro {
 			}
 
 			private void consultarNiveis() {
-				//TODO trocar para uma chamada ao BO de Nivel	
-				//niveis = new ArrayList<Nivel>();
-				
-				//Nivel nivelAdm = new Nivel(1, "Administrador");
-				//Nivel nivelNormal = new Nivel(2, "Normal");
-				
-				//niveis.add(nivelAdm);
-				//niveis.add(nivelNormal);
+				NivelBO nivel = new NivelBO();
+				nivel.consultarNivel();
 			}
 }
 
