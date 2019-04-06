@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
@@ -58,7 +59,7 @@ public class TelaCadastro {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-				consultarNiveis(); //TODO alterar esta chamada AQUI
+				consultarNiveis(); 
 				
 				frmCadastroDeUsuarios = new JFrame();
 				frmCadastroDeUsuarios.setTitle("Cadastro de usuários");
@@ -131,14 +132,14 @@ public class TelaCadastro {
 				JButton button = new JButton("Salvar");
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//TODO
-						//1 - Ler os valores digitados nos campos da tela
+					
+						String senha = new String(pfSenha.getPassword());
+						String confirmacaoSenha = new String(pfConfirmacaoSenha.getPassword());
+						NivelVO nivel = (NivelVO) cbNivel.getModel().getSelectedItem();
 						
 						Controller controller = new Controller();
-						//controller.salvar(txtNome, txtEmail, pfSenha, pfConfirmacaoSenha, cbNivel);
+						JOptionPane.showMessageDialog(null, controller.salvar(txtNome.getText(), txtEmail.getText(), senha, confirmacaoSenha, nivel));
 						
-						//3 - Mostrar a mensagem devolvida por UsuarioController na tela, 
-						//por exemplo com JOptionPane
 					}
 				});
 				button.setBounds(20, 155, 160, 35);
@@ -147,7 +148,7 @@ public class TelaCadastro {
 
 			private void consultarNiveis() {
 				NivelBO nivel = new NivelBO();
-				nivel.consultarNivel();
+				niveis = nivel.consultarNivel();
 			}
 }
 

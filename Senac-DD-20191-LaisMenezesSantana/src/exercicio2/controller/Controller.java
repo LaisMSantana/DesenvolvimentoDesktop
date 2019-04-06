@@ -78,18 +78,18 @@ public class Controller {
 			return usuarioBO.listarTodosUsuarios();
 	}
 	
-	public ArrayList<UsuarioVO> listarPorNivel(NivelVO nivel) throws Exception{
+	public ArrayList<UsuarioVO> listarPorNivel(NivelVO nivel){
 		if(nivel == null) {
-			throw new Exception("Escolha o nivel");
+			System.out.println("Escolha o nivel");
 		} 
 			UsuarioBO usuarioBO = new UsuarioBO();
 			return usuarioBO.listarUsuarioNivel(nivel);
 	}
 	
-	public UsuarioVO listarPorNome(String nome) throws Exception{
+	public UsuarioVO listarPorNome(String nome){
 		
 		if(nome == null|| nome.isEmpty() || nome.trim().length() < 3) {
-			throw new Exception("Nome deve possuir no mínimo 3 caracteres");
+			System.out.println("Nome deve possuir no mínimo 3 caracteres");
 		} 
 			UsuarioBO usuarioBO = new UsuarioBO();
 			return usuarioBO.listarUsuarioNome(nome);

@@ -11,6 +11,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import exercicio2.controller.Controller;
+import exercicio2.model.bo.NivelBO;
+import exercicio2.model.bo.UsuarioBO;
 import exercicio2.model.vo.NivelVO;
 import exercicio2.model.vo.UsuarioVO;
 
@@ -21,21 +24,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * 
- * Tela de listagem de usuários (item 1c da Atividade 4)
- * 
- * @author Vilmar César Pereira Júnior
- *
- */
-
 
 public class TelaListagem {
 
 	private JFrame frmCadastroDeUsuarios;
 	private JTextField txtNome;
 	private JComboBox cbNivel;
-	//private List<Nivel> niveis;
+	private List<NivelVO> niveis;
 	private JTable tblUsuarios;
 
 	/**
@@ -65,8 +60,8 @@ public class TelaListagem {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//TODO consultar os níveis no banco (criei na mão aqui :D)
-				consultarNiveis(); //TODO alterar esta chamada AQUI
+				consultarNiveis(); 
+				
 
 				frmCadastroDeUsuarios = new JFrame();
 				frmCadastroDeUsuarios.setTitle("Consulta de usuários");
@@ -89,18 +84,23 @@ public class TelaListagem {
 
 				//Novo componente: Combobox
 				cbNivel = new JComboBox();
-				//cbNivel.setModel(new DefaultComboBoxModel(niveis.toArray()));
+				cbNivel.setModel(new DefaultComboBoxModel(niveis.toArray()));
 
 				//Inicia sem nada selecionado no combo
 				cbNivel.setSelectedIndex(-1);
 
 				cbNivel.setBounds(70, 50, 320, 28);
 				frmCadastroDeUsuarios.getContentPane().add(cbNivel);
+				
 
 				JButton btnConsultarPorNivel = new JButton("Consultar por nível");
 				btnConsultarPorNivel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
+						Controller controller = new Controller();
+						NivelVO nivel = (NivelVO) cbNivel.getModel().getSelectedItem();
+						ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+						usuarios = controller.listarPorNivel(nivel);
+						atualizarTabelaUsuarios(usuarios);
 					}
 				});
 				btnConsultarPorNivel.setBounds(390, 49, 160, 30);
@@ -109,31 +109,39 @@ public class TelaListagem {
 				JButton btnConsultarPorNome = new JButton("Consultar por nome");
 				btnConsultarPorNome.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//TODO Chamar o método do controller: consultarPorNome(String nome)
-
-						//Mostrar na tabela a lista retornada
-						//ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-						//Usuario u1 = new Usuario(1, "User1");
-						//Usuario u2 = new Usuario(2, "User2");
-						//Usuario u3 = new Usuario(3, "User3");
-						//usuarios.add(u1);
-						//usuarios.add(u2);
-					//	usuarios.add(u3);
-						
-						//Chamar sempre que for atualizar a tabela com os usuários
-						//atualizarTabelaUsuarios(usuarios);
+						Controller controller = new Controller();
+						UsuarioVO usuario = new UsuarioVO();
+						usuario = controller.listarPorNome(txtNome.getText());
+						ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+						usuarios.add(usuario);
+						atualizarTabelaUsuarios(usuarios);
 					}
 				});
 				btnConsultarPorNome.setBounds(390, 14, 160, 30);
 				frmCadastroDeUsuarios.getContentPane().add(btnConsultarPorNome);
 
 				JButton btnConsultarTodos = new JButton("Consultar todos");
+				btnConsultarTodos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Controller controller = new Controller();
+						ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+						usuarios = controller.listarTodos();
+						atualizarTabelaUsuarios(usuarios);
+					}
+				});
 				btnConsultarTodos.setBounds(70, 85, 240, 30);
 				frmCadastroDeUsuarios.getContentPane().add(btnConsultarTodos);
 
 				JButton btnLimpar = new JButton("Limpar");
+				btnLimpar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						txtNome.setText("");
+						cbNivel.setSelectedIndex(-1);
+					}
+				});
 				btnLimpar.setBounds(310, 85, 240, 30);
 				frmCadastroDeUsuarios.getContentPane().add(btnLimpar);
+				
 
 				//Novo componente: tabela
 				tblUsuarios = new JTable();
@@ -157,26 +165,21 @@ public class TelaListagem {
 			 * Atualiza o JTable de usuários.
 			 * @param usuarios
 			 */
-			//protected void atualizarTabelaUsuarios(ArrayList<Usuario> usuarios) {
+			protected void atualizarTabelaUsuarios(ArrayList<UsuarioVO> usuarios) {
 				DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
 				
 				Object novaLinha[] = new Object[2];
-				//for(Usuario usuario: usuarios){
-					//novaLinha[0] = usuario.getId();
-					//novaLinha[1] = usuario.getNome();
-					//model.addRow(novaLinha);
-				//}
-			//}
+				for(UsuarioVO usuario: usuarios){
+					novaLinha[0] = usuario.getId();
+					novaLinha[1] = usuario.getNome();
+					model.addRow(novaLinha);
+				}
+			}
+			
 
 			private void consultarNiveis() {
-				//TODO trocar para uma chamada ao BO de Nivel	
-				//niveis = new ArrayList<Nivel>();
-
-				//Nivel nivelAdm = new Nivel(1, "Administrador");
-				//Nivel nivelNormal = new Nivel(2, "Normal");
-
-				//niveis.add(nivelAdm);
-				//niveis.add(nivelNormal);
-	}
+				NivelBO nivel = new NivelBO();
+				niveis = nivel.consultarNivel();
+			}
 
 }
