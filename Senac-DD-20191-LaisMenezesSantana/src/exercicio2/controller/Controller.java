@@ -2,6 +2,8 @@ package exercicio2.controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import exercicio2.model.bo.UsuarioBO;
 import exercicio2.model.vo.NivelVO;
 import exercicio2.model.vo.UsuarioVO;
@@ -13,45 +15,28 @@ public class Controller {
 		
 		if(nome == null || nome.trim().isEmpty()) {
 			mensagem = "Digite o nome!";
-		}
-		
-		if(email == null || email.trim().isEmpty()) {
+		}else if(email == null || email.trim().isEmpty()) {
 			mensagem = "Digite o email!";
-		}
-	
-		if(nivel == null) {
+		}else if(nivel == null) {
 			mensagem = "Escolha o nivel!";
-		}
-		
-		if(senha == null || senha.trim().isEmpty()) {
+		}else if(senha == null || senha.trim().isEmpty()) {
 			mensagem = "Digite a senha!";
-		}
-		
-		if(senhaConfirmar == null || senhaConfirmar.trim().isEmpty()) {
-			mensagem = "Digite a senha de confirmação!";
-		}
-		if(senhaConfirmar != senha) {
+		}else if(senhaConfirmar == null || senhaConfirmar.trim().isEmpty()) {
+			mensagem = "Digite a senha de confirmaï¿½ï¿½o!";
+		}else if(!senha.equals(senhaConfirmar)) {
 			mensagem = "Senha incorreta, digite novamente!";
-		}
-		
-		if(mensagem.isEmpty()) {
-			UsuarioVO usuario = new UsuarioVO();
-			usuario.setNome(nome);
-			usuario.setEmail(email);
-			usuario.setSenha(senha);
-			usuario.setNivel(nivel);
-			
+		}else if(mensagem.isEmpty()) {
 			UsuarioBO usuarioBO = new UsuarioBO();
-			usuarioBO.salvarUsuario(usuario);
+			mensagem = usuarioBO.salvarUsuario(nome, email, senha, nivel);
 		}
 		return mensagem;
 	}
 	
-	public String excluir(String idInformado, String email, String senha) {
+	public String excluir(UsuarioVO usuario, String email, String senha) {
 		String mensagem = "";
 		
-		if(idInformado == null || idInformado.trim().isEmpty()) {
-			mensagem = "Informe o id";
+		if(usuario == null) {
+			mensagem = "Informe o usuario";
 		}
 		if(email == null || email.trim().isEmpty()) {
 			mensagem = "Digite o email!";
@@ -61,13 +46,13 @@ public class Controller {
 		}
 		if(mensagem.isEmpty()) {
 			UsuarioVO usuarioEX = new UsuarioVO();
-			usuarioEX.setId(Integer.parseInt(idInformado));
+			usuarioEX.setId(usuario.getId());
 			UsuarioVO usuarioADM = new UsuarioVO();
 			usuarioADM.setEmail(email);
 			usuarioADM.setSenha(senha);		
 			
 			UsuarioBO usuarioBO = new UsuarioBO();
-			usuarioBO.excluirUsuario(usuarioEX , usuarioADM );
+			mensagem = usuarioBO.excluirUsuario(usuarioEX , usuarioADM );
 		}
 		
 		return mensagem;
@@ -80,7 +65,7 @@ public class Controller {
 	
 	public ArrayList<UsuarioVO> listarPorNivel(NivelVO nivel){
 		if(nivel == null) {
-			System.out.println("Escolha o nivel");
+			JOptionPane.showMessageDialog(null,"Escolha o nivel");
 		} 
 			UsuarioBO usuarioBO = new UsuarioBO();
 			return usuarioBO.listarUsuarioNivel(nivel);
@@ -89,7 +74,7 @@ public class Controller {
 	public UsuarioVO listarPorNome(String nome){
 		
 		if(nome == null|| nome.isEmpty() || nome.trim().length() < 3) {
-			System.out.println("Nome deve possuir no mínimo 3 caracteres");
+			JOptionPane.showMessageDialog(null,"Nome deve possuir no minimo 3 caracteres");
 		} 
 			UsuarioBO usuarioBO = new UsuarioBO();
 			return usuarioBO.listarUsuarioNome(nome);

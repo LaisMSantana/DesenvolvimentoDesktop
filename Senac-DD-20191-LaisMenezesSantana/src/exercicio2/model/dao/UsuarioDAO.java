@@ -15,12 +15,12 @@ public class UsuarioDAO {
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
 
-		String query = "INSERT INTO USUARIO (NOME, EMAIL, SENHA, IDNIVEL) VALUES ('" + usuario.getNome() + "', "
-				+ usuario.getEmail() + "'," + usuario.getSenha() + usuario.getNivel().getId() + ")";
+		String query = "INSERT INTO USUARIO (NOME, EMAIL, SENHA, IDNIVEL) VALUES ('" + usuario.getNome() + "', '"
+				+ usuario.getEmail() + "','" + usuario.getSenha() +"'," + usuario.getNivel().getId() + ")";
 		try {
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query de Cadastro do Sobremesa. Erro: " + e.getMessage());
+			System.out.println("Erro ao executar a Query de Cadastro do Usuario. Erro: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
@@ -129,7 +129,7 @@ public class UsuarioDAO {
 		try{
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e){
-			System.out.println("Erro ao executar a Query de Exclusão do Usuario. Causa: " + e.getMessage());
+			System.out.println("Erro ao executar a Query de Exclusï¿½o do Usuario. Causa: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
@@ -143,14 +143,14 @@ public class UsuarioDAO {
 		ResultSet resultado = null;
 		String query = "SELECT USUARIO.EMAIL, USUARIO.SENHA, NIVEL.DESCRICAO "
 				+ "FROM USUARIO INNER JOIN NIVEL ON USUARIO.IDNIVEL = NIVEL.IDNIVEL WHERE USUARIO.EMAIL = '" + usuarioADM.getEmail() +"' "
-						+ "AND USUARIO.SENHA = '" + usuarioADM.getSenha() + "' AND NIVEL.DESCRICAO = ADMIN";
+						+ "AND USUARIO.SENHA = '" + usuarioADM.getSenha() + "' AND NIVEL.DESCRICAO = 'Administrador'";
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de Registro por Admin. Causa: " + e.getMessage());
+			System.out.println("Erro ao executar a Query que verifica existï¿½ncia de Registro por Admin. Causa: " + e.getMessage());
 			return false;
 		} finally {
 			Banco.closeResultSet(resultado);

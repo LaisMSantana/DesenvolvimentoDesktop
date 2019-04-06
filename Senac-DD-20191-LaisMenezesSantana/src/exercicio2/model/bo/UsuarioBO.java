@@ -9,28 +9,30 @@ import exercicio2.model.vo.UsuarioVO;
 
 public class UsuarioBO {
 
-	public String salvarUsuario(UsuarioVO usuario) {
+	public String salvarUsuario(String nome, String email, String senha,NivelVO nivel) {
 		String mensagem = "";
-		UsuarioDAO uDAO = new UsuarioDAO();
 		
-		if(usuario.getNome().length() < 3) {
-			mensagem = "Nome incorreto! Mínimo 3 caracteres";
-		}
-		if(!emailCorreto(usuario.getEmail())) {
+		if(nome.length() < 3) {
+			mensagem = "Nome incorreto! Mï¿½nimo 3 caracteres";
+		} else if(!emailCorreto(email)) {
 			mensagem = "Email incorreto! Somente com um '@'";
-		}	
-		if(usuario.getSenha().length() < 6) {
-			mensagem = "Senha incorreta! Mínimo 6 caracteres";
-		}
-		if(usuario.getNivel() == null) {
-			mensagem = "Nivel incorreto! Obrigatório";
-		}
-		if(mensagem.isEmpty()) {
+		}else if(senha.length() < 6) {
+			mensagem = "Senha incorreta! Mï¿½nimo 6 caracteres";
+		}else if(nivel == null) {
+			mensagem = "Nivel incorreto! Obrigatï¿½rio";
+		}else if(mensagem.isEmpty()) {
+			UsuarioVO usuario = new UsuarioVO();
+			usuario.setNome(nome);
+			usuario.setEmail(email);
+			usuario.setSenha(senha);
+			usuario.setNivel(nivel);
+			
+			UsuarioDAO uDAO = new UsuarioDAO();
 			int statusPersistencia = uDAO.cadastrarUsuarioDAO(usuario);
 						
-			if(statusPersistencia == 1) {
+			if(statusPersistencia >= 1) {
 				mensagem = "Usuario salvo com sucesso";
-			}else if(statusPersistencia == 0) {
+			}else {
 				mensagem = "Erro ao salvar usuario";
 			}
 		}
@@ -50,7 +52,7 @@ public class UsuarioBO {
 		UsuarioDAO dao = new UsuarioDAO();
 		String mensagem = "";
 		if(dao.existeRegistroADM(usuarioADM) == false) {
-			mensagem = "Não existe usuario Admin com esse email e senha.";
+			mensagem = "Nï¿½o existe usuario Admin com esse email e senha.";
 		} else {
 			int statusPersistencia = dao.excluirUsuario(usuarioEX);
 			
@@ -77,6 +79,7 @@ public class UsuarioBO {
 		UsuarioDAO dao = new UsuarioDAO();
 		return dao.consultarTodas();
 	}
+
 	
 
 	

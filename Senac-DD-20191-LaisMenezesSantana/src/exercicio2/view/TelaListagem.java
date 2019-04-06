@@ -64,7 +64,7 @@ public class TelaListagem {
 				
 
 				frmCadastroDeUsuarios = new JFrame();
-				frmCadastroDeUsuarios.setTitle("Consulta de usuários");
+				frmCadastroDeUsuarios.setTitle("Consulta de usuï¿½rios");
 				frmCadastroDeUsuarios.setBounds(100, 100, 585, 405);
 				frmCadastroDeUsuarios.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frmCadastroDeUsuarios.getContentPane().setLayout(null);
@@ -73,7 +73,7 @@ public class TelaListagem {
 				lblNome.setBounds(20, 20, 55, 15);
 				frmCadastroDeUsuarios.getContentPane().add(lblNome);
 
-				JLabel lblNivel = new JLabel("Nível:");
+				JLabel lblNivel = new JLabel("Nï¿½vel:");
 				lblNivel.setBounds(20, 55, 55, 15);
 				frmCadastroDeUsuarios.getContentPane().add(lblNivel);
 
@@ -93,7 +93,7 @@ public class TelaListagem {
 				frmCadastroDeUsuarios.getContentPane().add(cbNivel);
 				
 
-				JButton btnConsultarPorNivel = new JButton("Consultar por nível");
+				JButton btnConsultarPorNivel = new JButton("Consultar por nï¿½vel");
 				btnConsultarPorNivel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Controller controller = new Controller();
@@ -137,6 +137,8 @@ public class TelaListagem {
 					public void actionPerformed(ActionEvent e) {
 						txtNome.setText("");
 						cbNivel.setSelectedIndex(-1);
+						DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+						model.setRowCount(1);
 					}
 				});
 				btnLimpar.setBounds(310, 85, 240, 30);
@@ -162,7 +164,7 @@ public class TelaListagem {
 			}
 
 			/**
-			 * Atualiza o JTable de usuários.
+			 * Atualiza o JTable de usuï¿½rios.
 			 * @param usuarios
 			 */
 			protected void atualizarTabelaUsuarios(ArrayList<UsuarioVO> usuarios) {

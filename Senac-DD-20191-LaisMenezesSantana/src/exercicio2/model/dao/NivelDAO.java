@@ -15,8 +15,7 @@ public class NivelDAO {
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		ArrayList<NivelVO> niveis = new ArrayList<NivelVO>();
-		String query = "SELECT IDNIVEL, DESCRICAO"
-				+ " FROM  NIVEL";
+		String query = "SELECT * FROM  NIVEL";
 		try{
 			resultado = stmt.executeQuery(query);
 			while(resultado.next()){

@@ -11,7 +11,7 @@ public class Banco {
 	
 		private static final String DRIVER = "com.mysql.jdbc.Driver";
 		private static final String BANCO = "DBEX2";
-		private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCO;
+		private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCO + "?useTimezone=true&serverTimezone=UTC";
 		private static final String USUARIO = "root";
 		private static final String SENHA = "";
 		
@@ -22,7 +22,7 @@ public class Banco {
 				conn = DriverManager.getConnection(CONEXAO, USUARIO, SENHA);
 				return conn;
 			} catch (ClassNotFoundException e) {
-				System.out.println("Classe do Driver não foi encontrada. Causa: " + e.getMessage());
+				System.out.println("Classe do Driver nï¿½o foi encontrada. Causa: " + e.getMessage());
 				return null;
 			} catch (SQLException e) {
 				System.out.println("Erro ao obter a Connection. Causa: " + e.getMessage());
@@ -36,7 +36,7 @@ public class Banco {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				System.out.println("Problema no fechamento da conexão. Causa: " + e.getMessage());
+				System.out.println("Problema no fechamento da conexï¿½o. Causa: " + e.getMessage());
 			}	
 		}
 		
