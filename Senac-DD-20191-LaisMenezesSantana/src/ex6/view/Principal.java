@@ -22,14 +22,21 @@ import javax.swing.JLabel;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class Principal extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JDesktopPane desktopPane;
 	private JLabel lblSistemDeGerenciamento;
 	CadastroCliente cadastroCliente = null;
-	TelaSobre s = null;
+	ListarProdutos listarProdutos = null;
+	ExcluirProduto excluirProduto = null;
+	Alterar alterarProduto = null;
+	TelaSobre telaSobre = null;
+	Ajuda ajuda = null;
 
 	/**
 	 * Launch the application.
@@ -52,7 +59,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 690, 400);
+		setBounds(100, 100, 877, 515);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -63,11 +70,14 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
 		mntmCadastrar.addMouseListener(new MouseAdapter() {
-			@Override
+		
 			public void mouseClicked(MouseEvent e) {
-				cadastroCliente = new CadastroCliente();
-				desktopPane.add(cadastroCliente);
-				cadastroCliente.show();
+				if(cadastroCliente == null) {
+					desktopPane.add(cadastroCliente);
+					cadastroCliente.show();
+				}else if(cadastroCliente!= null) {
+					cadastroCliente.setVisible(true);
+				}
 				
 			}
 		});
@@ -93,6 +103,21 @@ public class Principal extends JFrame {
 		mnProdutos.add(mntmCadastroDeProdutos);
 		
 		JMenuItem mntmAlteraoDeProduto = new JMenuItem("Alteração de Produto");
+		mntmAlteraoDeProduto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(alterarProduto == null) {
+					alterarProduto = new Alterar();
+					desktopPane.add(alterarProduto);
+					alterarProduto.show();
+				}else if(alterarProduto!= null) {
+					alterarProduto.setVisible(true);
+				}
+				
+			}
+			
+		});
+		
 		mntmAlteraoDeProduto.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-mensagem-de-avião-de-papel.png")));
 		mnProdutos.add(mntmAlteraoDeProduto);
 		
@@ -100,6 +125,13 @@ public class Principal extends JFrame {
 		mntmExcluirProduto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(excluirProduto == null) {
+					desktopPane.add(excluirProduto);
+					excluirProduto.show();
+				}else if(excluirProduto!= null) {
+					excluirProduto.setVisible(true);
+				}
+				
 			}
 		});
 		mntmExcluirProduto.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-molho-de-chaves.png")));
@@ -109,6 +141,12 @@ public class Principal extends JFrame {
 		mntmListarProdutos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(listarProdutos == null) {
+					desktopPane.add(listarProdutos);
+					listarProdutos.show();
+				}else if(listarProdutos!= null) {
+					listarProdutos.setVisible(true);
+				}
 			}
 		});
 		mntmListarProdutos.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-documento-regular.png")));
@@ -131,6 +169,13 @@ public class Principal extends JFrame {
 		mntmAjuda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(ajuda == null) { 
+					ajuda = new Ajuda();
+					desktopPane.add(ajuda);
+					ajuda.setVisible(true);
+					} else if(ajuda != null) {
+					ajuda.setVisible(true);
+					}
 			}
 		});
 		mntmAjuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
@@ -141,12 +186,11 @@ public class Principal extends JFrame {
 		mntmAutores.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(s == null) { 
-				s = new TelaSobre();
-				desktopPane.add(s);
-				s.setVisible(true);
-				} else if(s != null) {
-				s.setVisible(true);
+				if(telaSobre == null) { 
+				desktopPane.add(telaSobre);
+				telaSobre.setVisible(true);
+				} else if(telaSobre != null) {
+				telaSobre.setVisible(true);
 				}
 			}
 		});
@@ -159,11 +203,12 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblSistemDeGerenciamento = new JLabel("Sistem De Gerenciamento de Vendas");
-		lblSistemDeGerenciamento.setBounds(224, 257, 262, 15);
+		lblSistemDeGerenciamento.setBounds(359, 398, 262, 15);
 		contentPane.add(lblSistemDeGerenciamento);
 		
 		JDesktopPane desktopPane_1 = new JDesktopPane();
-		desktopPane_1.setBounds(0, 0, 674, 245);
+		desktopPane_1.setBounds(0, 0, 851, 387);
 		contentPane.add(desktopPane_1);
 	}
+	
 }
