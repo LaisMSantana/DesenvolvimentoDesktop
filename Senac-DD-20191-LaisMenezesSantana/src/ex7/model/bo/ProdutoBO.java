@@ -1,11 +1,11 @@
-package exercicio2.model.bo.exemplos;
+package ex7.model.bo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import exercicio2.model.dao.exemplos.ProdutoDAO;
-import exercicio2.model.seletor.exemplos.ProdutoSeletor;
-import exercicio2.model.vo.exemplos.Produto;
+import ex7.model.dao.ProdutoDAO;
+import ex7.model.seletor.ProdutoSeletor;
+import ex7.model.vo.Produto;
 
 public class ProdutoBO {
 
@@ -16,7 +16,7 @@ public class ProdutoBO {
 		return idGerado > 0;
 	}
 
-	public exercicio2.model.vo.exemplos.Produto buscarProdutoPorId(String textoId) {
+	public ex7.model.vo.Produto buscarProdutoPorId(String textoId) {
 		Produto produtoBuscado = dao.obterPorId(Integer.parseInt(textoId));
 		return produtoBuscado;
 	}
@@ -37,7 +37,7 @@ public class ProdutoBO {
 	}
 
 	public void gerarPlanilha(List<Produto> produtos, String caminhoEscolhido) {
-		// TODO
+		//TODO
 	}
 
 	public List<Produto> listarProdutos(ProdutoSeletor seletor) {
