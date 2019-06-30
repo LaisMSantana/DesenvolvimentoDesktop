@@ -204,17 +204,17 @@ public class TelaListagemProdutos extends JFrame {
 
 		lblPaginaAtual = new JLabel("");
 		lblPaginaAtual.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPaginaAtual.setBounds(186, 461, 35, 14);
-		lblPaginaAtual.setText("1");
+		lblPaginaAtual.setBounds(190, 460, 35, 15);
+		lblPaginaAtual.setText(paginaAtual + "");
 		contentPane.add(lblPaginaAtual);
 		
 		lblTotalPaginas = new JLabel("");
-		lblTotalPaginas.setBounds(240, 461, 21, 14);
-		lblTotalPaginas.setText("1");
+		lblTotalPaginas.setBounds(250, 460, 20, 15);
+		lblTotalPaginas.setText(totalPaginas + "");
 		contentPane.add(lblTotalPaginas);
 		
 		JLabel lblEtc = new JLabel("...");
-		lblEtc.setBounds(219, 461, 21, 14);
+		lblEtc.setBounds(225, 460, 20, 15);
 		contentPane.add(lblEtc);
 
 		btnConsultar.addActionListener(new ActionListener() {
