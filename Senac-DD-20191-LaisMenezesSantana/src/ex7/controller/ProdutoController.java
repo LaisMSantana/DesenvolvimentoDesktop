@@ -1,10 +1,11 @@
-package exercicio2.controller.exemplos;
+package ex7.controller;
 
 import java.util.List;
 
-import exercicio2.model.bo.exemplos.ProdutoBO;
-import exercicio2.model.seletor.exemplos.ProdutoSeletor;
-import exercicio2.model.vo.exemplos.Produto;
+import ex7.model.bo.ProdutoBO;
+import ex7.model.seletor.ProdutoSeletor;
+import ex7.model.util.GeradorPlanilha;
+import ex7.model.vo.Produto;
 
 public class ProdutoController {
 
@@ -49,14 +50,14 @@ public class ProdutoController {
 		String validacao = "";
 
 		if (produto == null) {
-			validacao = "Produto est· NULO!";
+			validacao = "Produto est√° NULO!";
 		} else {
 			// Validar o preenchimento
 			if (produto.getNome().trim().equals("")) {
-				validacao += "- Nome È obrigatÛrio \n";
+				validacao += "- Nome √© obrigat√≥rio \n";
 			}
 			if (produto.getFabricante().trim().equals("")) {
-				validacao += "- Fabricante È obrigatÛrio \n";
+				validacao += "- Fabricante √© obrigat√≥rio \n";
 			}
 		}
 		return validacao;
@@ -70,5 +71,10 @@ public class ProdutoController {
 
 	public List<Produto> listarProdutos(ProdutoSeletor seletor) {
 		return bo.listarProdutos(seletor);
+	}
+
+	public String gerarPlanilha(List<Produto> produtosConsultados, String caminho) {
+		GeradorPlanilha geradorExcel = new GeradorPlanilha();
+		return geradorExcel.gerarPlanilhaProdutos(caminho, produtosConsultados);
 	}
 }

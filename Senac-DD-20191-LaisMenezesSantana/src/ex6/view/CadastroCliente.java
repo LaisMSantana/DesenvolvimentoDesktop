@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CadastroCliente extends JInternalFrame {
 	private JTextField textField;
@@ -69,7 +71,7 @@ public class CadastroCliente extends JInternalFrame {
 		getContentPane().add(textField_2);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(98, 191, 114, 25);
+		btnSalvar.setBounds(97, 190, 114, 25);
 		getContentPane().add(btnSalvar);
 
 	}
