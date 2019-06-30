@@ -43,9 +43,6 @@ public class TelaListagemProdutos extends JFrame {
 	private DatePicker dtFimCadastro;
 	private int paginaAtual = 1;
 	private int totalPaginas = 1;
-	private int total;
-	private int quociente;
-	private int resto;
 	private List<Produto> produtosConsultados;
 	private JTextField txtNome;
 	private JTextField txtPeso;
@@ -176,13 +173,13 @@ public class TelaListagemProdutos extends JFrame {
 		
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnProximo.setEnabled(true);
 				if (paginaAtual > 1) {
 					paginaAtual--;
 				}
 				if (paginaAtual == 1) {
 					btnAnterior.setEnabled(false);
 				}
+				btnProximo.setEnabled(true);
 				consultarProdutos();
 			}
 		});
@@ -193,9 +190,9 @@ public class TelaListagemProdutos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btnAnterior.setEnabled(true);
 				paginaAtual++;
-				if(paginaAtual == totalPaginas) {
+				if(paginaAtual >= totalPaginas) {
 					btnProximo.setEnabled(false);
-				} 
+				}
 			consultarProdutos();
 			}
 		});
@@ -226,24 +223,25 @@ public class TelaListagemProdutos extends JFrame {
 
 	protected void consultarProdutos() {
 		lblPaginaAtual.setText(paginaAtual + "");
-		lblTotalPaginas.setText(totalPaginas + "");
 
 		ProdutoController controlador = new ProdutoController();
 		ProdutoSeletor seletor = new ProdutoSeletor();
 
-		seletor.setPagina(paginaAtual);
+		
 		seletor.setLimite(TAMANHO_PAGINA);
-		total = controlador.listarProdutos(seletor).size();
+		int total = controlador.listarProdutos(seletor).size();
+ 
+		int quociente = total / TAMANHO_PAGINA;
+		int resto = total % TAMANHO_PAGINA;
 		
-		
-		quociente = total / TAMANHO_PAGINA;
-		resto = total % TAMANHO_PAGINA;
-		
-		if(resto == 0) {
+	    if(resto == 0) {
 			totalPaginas = quociente;
 		} else {
 			totalPaginas = quociente + 1;
 		}
+	    
+	    lblTotalPaginas.setText(totalPaginas + "");
+	    seletor.setPagina(paginaAtual);
 
 		// Preenche os campos de filtro da tela no seletor
 		if (cbCor.getSelectedIndex() > 0) {
